@@ -25,8 +25,8 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	Map<String ,User> userMap;
 	Map<String, String> idMap;
 	List<String> rankList;
+	Map<String, Integer> scoreMap;
 	
-	/*static*/Map<String, Integer> scoreMap;
 	static User currentUser;
 	
 	String userMapFileName;
@@ -38,10 +38,10 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	File idMapFile;
 	File scoreMapFile;
 	
-    Game1 game1 = new Game1();
-    Game2 game2 = new Game2();
-    Game3 game3 = new Game3();
-    Game4 game4 = new Game4();
+    Game1 game1;
+    Game2 game2;
+    Game3 game3;
+    Game4 game4;
 	
 	
 	MGSystem(){
@@ -59,6 +59,11 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		userMapFile = new File(userMapFileName);
 		idMapFile = new File(idMapFileName);
 		scoreMapFile = new File(scoreMapFileName);
+		
+	    game1 = new Game1();
+	    game2 = new Game2();
+	    game3 = new Game3();
+	    game4 = new Game4();
 
 	}
 	
@@ -155,9 +160,14 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			System.out.println(result);
 			System.out.println();
 			System.out.println();
-			System.out.println();
+			System.out.printf("\t\t\t\t\t\t\t\t[뒤로가기는 0] \n");
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			id = sc.nextLine();
+			
+			if(id.equals("0")) {// 입력값이 0이면 뒤로가기
+				return;
+			}
+			
 			if (!idMap.containsKey(id)) {
 				if(idChecker(id)) {
 					break;
@@ -182,10 +192,15 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			System.out.println(result2);
 			System.out.println();
 			System.out.println();
-			System.out.println();
+			System.out.printf("\t\t\t\t\t\t\t\t[뒤로가기는 0] \n");
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			
 			pwd = sc.nextLine();
+			if(pwd.equals("0")) {// 입력값이 0이면 뒤로가기
+				return;
+			}
+			
+			
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			System.out.println();
 			System.out.println();
