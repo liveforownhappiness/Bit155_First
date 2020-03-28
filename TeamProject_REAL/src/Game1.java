@@ -31,17 +31,18 @@ public class Game1 extends Game{
 		score4 = MGSystem.currentUser.getGame4Score();
 		
 		System.out.println();
-		System.out.println("**************************************");
-		System.out.println("                         영타 맞추기 게임");
-		System.out.println("**************************************");
-		System.out.println("          < 게임 설명 >");
-		System.out.println("	당신은 영타로 쓰여진 한국어를 얼마나 빨리 알아볼 수 있나요?");
-		System.out.println("	영타로 쓰여진 문제를 보고 한국어로 답을 입력하세요");
-		System.out.println("	답을 빨리 맞출 수록 더 많은 점수를 획득할 수 있습니다 ");
+		System.out.println("**************************************************");
+		System.out.println("		영타 맞추기 게임");
+		System.out.println("**************************************************");
+		System.out.println("		< 게임 설명 >");
+		System.out.println("	영타로 쓰여진 한글 단어를 얼마나 빨리 알아볼 수 있나요?");
+		System.out.println("	영타로 쓰여진 문제를 보고 한글로 답을 입력하세요");
+		System.out.println("	답을 빨리 맞출 수록, 더 긴 단어를 맞출 수록 ");
+		System.out.println("	더 많은 점수를 획득할 수 있습니다 ");
 		System.out.println("	10문제 안에 더 많은 점수를 획득해보세요 !");
-		System.out.println("**************************************");
-		System.out.println("1. 게임 실행하기  	 0. 이전 메뉴로 돌아가기");
-		System.out.println("**************************************");
+		System.out.println("**************************************************");
+		System.out.println("	1. 게임 실행하기  	 0. 이전 메뉴로 돌아가기");
+		System.out.println("**************************************************");
 		
 		int menu = 0;
 		do {
@@ -102,7 +103,7 @@ public class Game1 extends Game{
 		for(int i = 0; i < 10; i++) {
 				
 			while(true) {
-				randomIndex = (int)(Math.random()*14);	
+				randomIndex = (int)(Math.random()*(quizArr[0][0].length*3));	
 				if(indexCheck.add(randomIndex) == true) {
 					break;
 				}

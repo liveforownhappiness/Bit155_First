@@ -679,24 +679,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	
 	
 	public void run() {
-//			if(this.userMapFile.exists() == true) {
-//				userMap = this.loadInfo(userMapFileName);
-//				} 
-//			System.out.println("loaded" + userMap.toString());
-//			
-//			if(this.idMapFile.exists() == true) {
-//				idMap = this.loadInfo(idMapFileName);
-//				}
-//			System.out.println("idMap"+idMap.toString());
-//			if(this.scoreMapFile.exists() == true) {
-//				scoreMap = this.loadInfo(scoreMapFileName);
-//			}
-//			System.out.println("scoreMap" + scoreMap.toString());
-//			// 데이터 로드 및 확인작업
-//			
-//			sortByValue(scoreMap).toString(); // 랭킹 만들기
-
-			
+//		데이터 로드 displayMenu0으로 이동
 			
 			while(true) {
 				this.displayMenu0(); // 첫화면
