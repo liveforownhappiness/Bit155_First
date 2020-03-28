@@ -435,7 +435,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 				,currentUser.getGame3Score()
 				,currentUser.getGame4Score()
 				,currentUser.getTotalScore()
-				,currentUser.getRank());
+				, (currentUser.getTotalScore() == 0) ? "순위 정보가 없습니다" : currentUser.getRank());
 		System.out.println();
 		System.out.println();
 		String str2 = String.format("\t\t\t\t\t\t[회원 탈퇴는 %s를 입력해주세요] \n\t\t\t\t\t\t\t\t[뒤로가기는 0] \n"
@@ -470,8 +470,9 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	public void showRank() {	
 		sortByValue(scoreMap); //랭킹만들기
 		
+//		if(scoreMap.size() < 5) {
 		if(scoreMap.size() < 5) {
-			if(scoreMap.size() == 0) {
+			if((scoreMap.size() == 0) || (scoreMap.get(rankList.get(0)) == 0)) {
 				System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 				System.out.println();
 				System.out.println();
@@ -488,12 +489,14 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 				System.out.println();
 				System.out.println("                                <RANK LIST>                                  ");
 			
-				System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 				for(int i = 0; i < scoreMap.size(); i++) {
 //					System.out.printf("\t\t\t\t[%dst] : %-20s\t\t",i+1 , rankList.get(i) + "\n\n");
 					System.out.printf("\t\t\t[%dst] : %-15s\t%-20s\t\t     \n",i+1 , rankList.get(i), scoreMap.get(rankList.get(i)));
-
 				}
+				System.out.println();
+				System.out.println();
+				System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+
 			}
 			
 		}else {
