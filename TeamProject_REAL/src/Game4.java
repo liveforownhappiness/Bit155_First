@@ -5,7 +5,7 @@ public class Game4 extends Game{
 	int y;
 	int z;// 사람이 적을 답
 	int answer;// 계산된 답
-	int i;// 문제 반복
+
 //##
 	long start;//게임 시작 시간
 	long end;//게임 종료 시간
@@ -13,8 +13,8 @@ public class Game4 extends Game{
 	Scanner scan;
 	Random random;
 	Game4() {
-		score4 = 0;	
-		newScore = 0; //#
+//		score4 = 0;	
+		newScore = 0; 
 		scan = new Scanner(System.in);
 		random = new Random();	
 	}
@@ -48,31 +48,60 @@ public class Game4 extends Game{
 		}while(true);
 		return menu;
 	}
+	
 	public void guguMain() {
+		System.out.println("gugumain before while ");
+
 		toGdp : while(true) {
+			System.out.println("gugumain while start");
+
 			switch(this.intro()) {
-			case 1 : makeSubGame();
+			case 1 : System.out.println("gugumain switch case1 before makeSubGame");
+				this.makeSubGame();
+				System.out.println("gugumain switch case1 after makeSubGame");
 				break;
 			case 0 : System.out.println("이전메뉴로 돌아갑니다.");
 				break toGdp;
 			}
+			System.out.println("gugumain switch end");
+
 		}
+	System.out.println("gugumain while end");
+
 	}
+
+	
 	void makeSubGame() {
+		int i = 0;// 문제 반복 // i를 로컬변수로 설정해야 메소드가 실행될 때마다 만들어지겠죠?
+		System.out.println("makeSubGame start");
+
             start = System.currentTimeMillis();
-		while (i < 5) {			
+    		System.out.println("makeSubGame before while");
+
+		while (i < 5) {	// $$ i를 인스턴스 변수로 뽑으면 게임이 한번밖에 실행이 안됩니다 ^^
+    		System.out.println("makeSubGame while start");
+
 			i++;
 			x = random.nextInt(9) + 1;
 			y = random.nextInt(9) + 1;
 			answer = x * y;
 			System.out.println(x + "X" + y + "=?");
+			
+    		System.out.println("makeSubGame while before scanner");
+
 			z = Integer.parseInt(scan.nextLine());
+//			z = scan.nextInt();
+    		System.out.println("makeSubGame while after scanner");
+
+    		System.out.println("makeSubGame while before if");
 			if (z == answer) {
 				System.out.println("정답입니다!");
 				newScore += 15;
 			} else {
 				System.out.println("오답입니다!");
 			}
+    		System.out.println("makeSubGame while after if");
+
 		}
 		end = System.currentTimeMillis();
 		float playTime = (end - start)/1000f;
@@ -90,7 +119,11 @@ public class Game4 extends Game{
 		} else if(newScore < 100 ){
 			System.out.println("최종점수는 100점 만점 중" + newScore + " 점입니다." + "\n아쉽게 만점을 받지 못했습니다\n" + "분발하세요!");
 		}
+		
+		System.out.println("makeSubGame while before autoSave");
 		scoreAutoSave(newScore);
+		System.out.println("makeSubGame while after autoSave");
+
 	}
 	@Override
 	public void scoreAutoSave(int newScore) {

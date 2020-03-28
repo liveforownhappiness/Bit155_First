@@ -526,7 +526,9 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	}
 	
 	void gameMenudisplay() {
-		toDp2 : while(true) {																	 //여기41s가 게임4시작부분
+		toDp2 : while(true) {	 //여기41s가 게임4시작부분 // ? 이 주석 뭐지?
+			System.out.println("gmd while start");
+			
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			System.out.println();
 			System.out.println();
@@ -536,12 +538,21 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			System.out.println();
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			int menu = 0;
+			
+			System.out.println("gmd before try");
 				try {
-					toGmd : while(true) { //$$ while문이 스캐너를 감싸도록 이동
+					System.out.println("gmd try start");
+
+//					toGmd : while(true) { //$$ while문이 스캐너를 감싸도록 이동
+					System.out.println("gmd before scanner");
 					menu = Integer.parseInt(sc.nextLine());
-					
+					System.out.println("gmd after scanner");
+
+					System.out.println("gmd before if");
 					if(menu >= 0 && menu <= 5) {
-						//원래 while 위치
+						System.out.println("gmd if start");
+
+						toGmd : while(true) { //$$ 원래 while문이 있던 자리
 							switch (menu) {
 							case 0: break toDp2; //로그인 이후화면
 							case 1: this.game1.tgMain();
@@ -559,16 +570,25 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 							case 5: this.displayMenu0(); //맨처음화면
 								break;
 							}
+						}//while end
+						
 					}else {
+						System.out.println("gmd if wrong input");
+
 						throw new Exception("잘못된 입력입니다.");
 					}
-					}
+					System.out.println("gmd if end");
+//					}
 				} catch (Exception e) {
+					System.out.println("gmd try or if error");
+
 					System.out.println(e.getMessage());
 					System.out.println("잘못된 선택입니다.");
 					System.out.println("0~4까지 입력해주세요.");
-				} 
+				}
+				System.out.println("gmd try catch end");
 		}
+	System.out.println("gmd while end");
 	}// gameMenudisplay end
 	
 	void displayMenu2() {
