@@ -83,7 +83,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		System.out.println();
 		
 		String maindisplayinput = this.sc.nextLine();
-		while (maindisplayinput != null) {
+		while (maindisplayinput != null) { // maindisplayinput를 인스턴스 변수로 만들어 생성자에 null로 선언해두고 뒷부분에서 여기로 오고싶으면 변수를 바꿔주면 될 것 같다.
 			this.showSignMenu();
 		}
 		
@@ -167,20 +167,21 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			}
 			
 		}
-		
-		System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
-		System.out.println();
-		System.out.println();
-		String result2 = String.format("%45s\n\n%35s", " ------< 회원가입 >------ ","비밀번호를 입력하세요: ");
-		System.out.println(result2);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 		String pwd = null;
 		String pwd2 = null;
 		
 		while (true) {
+			// 비밀번호 일치하지 않아서 다시 입력할때 비밀번호 입력창부터 다시 뜨게 코드 수정
+			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+			System.out.println();
+			System.out.println();
+			String result2 = String.format("%45s\n\n%35s", " ------< 회원가입 >------ ","비밀번호를 입력하세요: ");
+			System.out.println(result2);
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+			
 			pwd = sc.nextLine();
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			System.out.println();
@@ -268,7 +269,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 					System.out.println("로그인 성공");
 					
 //					System.out.println("beforeCU"+currentUser.toString());
-					loadInfo(userMapFileName); // 이거 왜 주석처리 해놨더라? 시작하면서 파일 로드해서?
+					loadInfo(userMapFileName); // 이거 왜 주석처리 해놨더라? 시작하면서 파일 로드해서? 일단살림
 					currentUser = this.userMap.get(id);// 로그인이 성공하면 해당 유저의 정보를 불러오는 기능
 					System.out.println("afterCU"+currentUser.toString());
 					displayMenu2();
@@ -568,44 +569,6 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		}
 	}// gameMenudisplay end
 	
-//int displayMenu1() {
-//	System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
-//	System.out.println();
-//	System.out.println();
-//	String result = String.format("%39s\n\n%39s\n\n%40s\n\n%39s\n\n", "▶1. 로그인","▶2. 회원가입","▶3. 랭킹보기","▶0. 프로그램 종료");
-//	System.out.println(result);
-//	System.out.println();
-//	System.out.println();
-//	System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
-//	
-//	int menu = 0;
-//			try {
-//				menu = Integer.parseInt(sc.nextLine());
-//				if(menu >= 1 && menu <= 4) {
-//						switch (menu) {
-//						case 1: 
-//							this.signIn(); //로그인
-//								break;
-//						case 2: this.signUp(); //회원가입
-//							break;
-//						case 3: System.out.println("before showRank");
-//
-//							this.showRank(); //랭킹확인
-//						System.out.println("after showRank");
-//						    break;
-//						case 4:System.exit(0);
-//						}
-//				}else {
-//					throw new Exception("잘못된 입력입니다.");
-//				}
-//			} catch (Exception e) {
-//				System.out.println(e.getMessage());
-//				System.out.println("잘못된 선택입니다.");
-//				System.out.println("1~4까지 입력해주세요.");
-//			}
-//		return menu;
-//		}	//displayMenu1 end
-	
 	void displayMenu2() {
 		toDp1 : while(true) {
 			System.out.println("dp2 while start");
@@ -685,7 +648,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			
 			
 			while(true) {
-				this.displayMenu0(); // 로그인, 회원가입, 랭킹확인, 종료
+				this.displayMenu0(); // 첫화면
 				
 			}
 
