@@ -26,7 +26,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	Map<String, String> idMap;
 	List<String> rankList;
 	
-	static Map<String, Integer> scoreMap;
+	/*static*/Map<String, Integer> scoreMap;
 	static User currentUser;
 	
 	String userMapFileName;
@@ -159,7 +159,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 				if(idChecker(id)) {
 					break;
 				}else {
-					System.out.println("아이디를 12자이내(영어, 숫자가능)로 설정해주세요");
+					System.out.println("아이디를 5자 이상 12자이내(영어, 숫자가능)로 설정해주세요");
 				}
 				
 			} else {
@@ -499,19 +499,17 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		
 				for(int i = 0; i < 5; i++) {
 				System.out.printf("\t\t\t\t[%dst] : %-20s\t\t    \n",i+1 , rankList.get(i));
-			//String result = String.format("■%39s %33s\n■ %75s\n■%39s %32s\n■ %75s\n■%39s %32s\n■ %75s\n■%39s %30s\n■ %75s", rankList.get(0),"■","■",rankList.get(1),"■","■",rankList.get(2),"■","■",rankList.get(3),"■","■",rankList.get(4));
-			//System.out.println(result);
 				}
-		
-			
-//			String str = String.format("■\t\t[1st] : %-50s■\n■\t\t[2nd] : %-50s■\n■\t\t[3rd] : %-50s■\n■\t\t[4th] : %-50s■\n■\t\t[5th] : %-50s■\n"
-//					,rankList.get(0)
-//					,rankList.get(1)
-//					,rankList.get(2)
-//					,rankList.get(3)
-//					,rankList.get(4));
-//			System.out.printf(str);                                                                     	
+			System.out.println();
+			System.out.println();
+			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+
+		                                                                    	
 	}
+		System.out.println("메뉴로 나가려면 아무키나 누르십시오. . .                                     ");
+		String input = this.sc.nextLine();
+
+		
 		}
 	void saveCUGameScore() { // ## 메소드 추가
 		userMap.put(currentUser.getId(), currentUser);
