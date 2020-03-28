@@ -81,12 +81,12 @@ public class Game4 extends Game{
 		if(playTime < 6) {
 			bonus = 30;
 		}
-		newScore += newScore*15/bonus;
+		newScore += newScore*12/bonus;
 		if(newScore > 100) {
 			newScore = 100;
 		}
 		if (newScore == 100) {
-			System.out.println("만점입니다");			
+			System.out.println("최종점수는 100점 만점 중 만점입니다");			
 		} else if(newScore < 100 ){
 			System.out.println("최종점수는 100점 만점 중" + newScore + " 점입니다." + "\n아쉽게 만점을 받지 못했습니다\n" + "분발하세요!");
 		}

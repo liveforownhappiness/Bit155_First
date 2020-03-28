@@ -553,7 +553,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 							case 3: System.out.println("게임3 실행");//this.playGame3; //준수도쿠
 								saveCUGameScore();
 							break toGmd;
-							case 4: this.game4.guguMain();
+							case 4: this.game4.guguMain();//$$ game4 변경내용 수정
 								saveCUGameScore();
 							break toGmd;
 							case 5: this.displayMenu0(); //맨처음화면
