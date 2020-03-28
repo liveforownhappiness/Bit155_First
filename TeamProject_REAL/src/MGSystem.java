@@ -49,7 +49,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		userMap = new HashMap<String ,User>();
 		idMap = new HashMap<String, String>();
 		scoreMap = new HashMap<String, Integer>();
-		rankList = null; //#null값으로 수정
+		rankList = null;
 		currentUser = null;
 		
 		userMapFileName = "userMap.txt";
@@ -171,7 +171,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		String pwd2 = null;
 		
 		while (true) {
-			// 비밀번호 일치하지 않아서 다시 입력할때 비밀번호 입력창부터 다시 뜨게 코드 수정
+			//$$ 비밀번호 일치하지 않아서 다시 입력할때 비밀번호 입력창부터 다시 뜨게 코드 수정
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			System.out.println();
 			System.out.println();
@@ -395,7 +395,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	
 	
 	public List<String> sortByValue(final Map<String, Integer> map){
-		rankList = new ArrayList<String>(); //#추가
+		rankList = new ArrayList<String>();
 		rankList.addAll(map.keySet());
 		
 		Collections.sort(rankList, new Comparator<Object>() {
@@ -413,7 +413,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		
 		if(currentUser != null) {
 			currentUser.setRank((rankList.indexOf(currentUser.getId()))+1);
-		}//#추가	로그인유저 랭킹 
+		}//로그인유저 랭킹 
 		
 		return rankList;
 	} // makeRank 대신 쓰는중
@@ -448,7 +448,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			case "0":
 				System.out.println("showUserInfo switch case 0");
 
-//			displayMenu2(); // ##지금 여기 막아봤음
+//			displayMenu2(); // $$지금 여기 막아봤음
 			break label; // 이렇게 하면 showUserInfo를 나가서 dp2에서 로그아웃 했을 때 showsignmenu로 돌아감.
 			case "9":
 				System.out.println("showUserInfo switch case 9");
@@ -512,7 +512,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 
 		
 		}
-	void saveCUGameScore() { // ## 메소드 추가
+	void saveCUGameScore() { 
 		userMap.put(currentUser.getId(), currentUser);
 		scoreMap.put(currentUser.getId(), currentUser.getTotalScore());
 		
@@ -537,9 +537,11 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			int menu = 0;
 				try {
+					toGmd : while(true) { //$$ while문이 스캐너를 감싸도록 이동
 					menu = Integer.parseInt(sc.nextLine());
+					
 					if(menu >= 0 && menu <= 5) {
-						toGmd : while(true) {
+						//원래 while 위치
 							switch (menu) {
 							case 0: break toDp2; //로그인 이후화면
 							case 1: this.game1.tgMain();
@@ -551,15 +553,15 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 							case 3: System.out.println("게임3 실행");//this.playGame3; //준수도쿠
 								saveCUGameScore();
 							break toGmd;
-							case 4: this.game4.makeSubGame();
+							case 4: this.game4.guguMain();
 								saveCUGameScore();
 							break toGmd;
 							case 5: this.displayMenu0(); //맨처음화면
 								break;
 							}
-							}
 					}else {
 						throw new Exception("잘못된 입력입니다.");
+					}
 					}
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -570,7 +572,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	}// gameMenudisplay end
 	
 	void displayMenu2() {
-		toDp1 : while(true) {
+		toSsm : while(true) {
 			System.out.println("dp2 while start");
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 			System.out.println();
@@ -585,22 +587,18 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 					if(menu >= 0 && menu <= 3) {
 						 toDp2 :while(true) {
 							switch (menu) {
-							case 0: //displayMenu1(); //뒤로가기 == 로그아웃
+							case 0: //뒤로가기 == 로그아웃
 									if(currentUser != null) {
-										//여기에 밑에 두 줄 넣기 근데 왜 0해서 로그아웃 한다음에
 										System.out.println("CU!=null"+currentUser.toString());
 										userMap.put(currentUser.getId(), currentUser);
 										scoreMap.put(currentUser.getId(), currentUser.getTotalScore());
-									//이렇게 하면 에러는 안나는데 ........
-									//왜 break를 타고 다시 dp2로 가지? showsign으로 가야하는데...
 									}
 									
-
 									currentUser = null;
 									System.out.println("로그아웃 되었습니다.");
 									System.out.println("dp2 while switch case 0");
 
-									break toDp1; // 여기가 문제임 !!!!!!!!!!!!!!!!!!!!!!!!
+									break toSsm;
 							case 1: this.gameMenudisplay(); //게임선택화면
 									break toDp2;
 							case 2: this.showRank(); //종합랭킹
