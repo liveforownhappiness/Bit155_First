@@ -451,8 +451,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			case "0":
 				System.out.println("showUserInfo switch case 0");
 
-//			displayMenu2(); // $$지금 여기 막아봤음
-			break label; // 이렇게 하면 showUserInfo를 나가서 dp2에서 로그아웃 했을 때 showsignmenu로 돌아감.
+			break label;
 			case "9":
 				System.out.println("showUserInfo switch case 9");
 
@@ -577,21 +576,8 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 							case 4: this.game4.guguMain();//$$ game4 변경내용 수정
 								saveCUGameScore();
 							break toGmd;
-							case 5: //게임 완료 후 case 5 실행하면 rank가 갱신되지 않는 문제.
-								//어차피 초기화면으로 돌아가는건 자동으로 로그아웃이 돼야 하기 때문에 로그아웃 기능 추가.
-								if(currentUser != null) {
-									System.out.println("CU!=null"+currentUser.toString());
-									userMap.put(currentUser.getId(), currentUser);
-									scoreMap.put(currentUser.getId(), currentUser.getTotalScore());
-									
-									saveData(userMap, userMapFileName);
-									saveData(scoreMap, scoreMapFileName);
-								}
-								
-								currentUser = null;
-								System.out.println("로그아웃 되었습니다.");
-								
-								
+							case 5: //어차피 초기화면으로 돌아가는건 자동으로 로그아웃이 돼야 하기 때문에 로그아웃 기능 추가.
+								signOut();							
 								this.displayMenu0(); //맨처음화면
 								break;
 							}
@@ -633,14 +619,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 						 toDp2 :while(true) {
 							switch (menu) {
 							case 0: //뒤로가기 == 로그아웃
-									if(currentUser != null) {
-										System.out.println("CU!=null"+currentUser.toString());
-										userMap.put(currentUser.getId(), currentUser);
-										scoreMap.put(currentUser.getId(), currentUser.getTotalScore());
-									}
-									
-									currentUser = null;
-									System.out.println("로그아웃 되었습니다.");
+									signOut();
 									System.out.println("dp2 while switch case 0");
 
 									break toSsm;
@@ -682,6 +661,20 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 		}
 		
 		sortByValue(scoreMap); // 랭킹 만들기
+	}
+	
+	public void signOut() {
+		if(currentUser != null) {
+			System.out.println("CU!=null"+currentUser.toString());//CU확인용 코드
+			userMap.put(currentUser.getId(), currentUser);
+			scoreMap.put(currentUser.getId(), currentUser.getTotalScore());
+			
+			saveData(userMap, userMapFileName);
+			saveData(scoreMap, scoreMapFileName);
+		}
+		
+		currentUser = null;
+		System.out.println("로그아웃 되었습니다.");
 	}
 	
 	
