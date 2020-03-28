@@ -64,6 +64,9 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void displayMenu0() {//완료
+		
+		this.gameDataLoad(); // 데이터 로드기능 displayMenu0로 이동
+		
 		System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 		System.out.println("■                                                                         ■");
 		System.out.println("■  ##        ##  ###  ##    #  ###  #######    ##    ##       ##  #####   ■ ");
@@ -487,8 +490,9 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			
 				System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
 				for(int i = 0; i < scoreMap.size(); i++) {
-					System.out.printf("\t\t\t\t[%dst] : %-20s\t\t",i+1 , rankList.get(i) + "\n\n");
-			
+//					System.out.printf("\t\t\t\t[%dst] : %-20s\t\t",i+1 , rankList.get(i) + "\n\n");
+					System.out.printf("\t\t\t[%dst] : %-15s\t%-20s\t\t     \n",i+1 , rankList.get(i), scoreMap.get(rankList.get(i)));
+
 				}
 			}
 			
@@ -499,7 +503,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 			System.out.println("                                <RANK LIST>                                  ");
 		
 				for(int i = 0; i < 5; i++) {
-				System.out.printf("\t\t\t\t[%dst] : %-20s\t\t    \n",i+1 , rankList.get(i));
+				System.out.printf("\t\t\t[%dst] : %-15s\t%-20s\t\t     \n",i+1 , rankList.get(i), scoreMap.get(rankList.get(i)));
 				}
 			System.out.println();
 			System.out.println();
@@ -567,7 +571,22 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 							case 4: this.game4.guguMain();//$$ game4 변경내용 수정
 								saveCUGameScore();
 							break toGmd;
-							case 5: this.displayMenu0(); //맨처음화면
+							case 5: //게임 완료 후 case 5 실행하면 rank가 갱신되지 않는 문제.
+								//어차피 초기화면으로 돌아가는건 자동으로 로그아웃이 돼야 하기 때문에 로그아웃 기능 추가.
+								if(currentUser != null) {
+									System.out.println("CU!=null"+currentUser.toString());
+									userMap.put(currentUser.getId(), currentUser);
+									scoreMap.put(currentUser.getId(), currentUser.getTotalScore());
+									
+									saveData(userMap, userMapFileName);
+									saveData(scoreMap, scoreMapFileName);
+								}
+								
+								currentUser = null;
+								System.out.println("로그아웃 되었습니다.");
+								
+								
+								this.displayMenu0(); //맨처음화면
 								break;
 							}
 						}//while end
@@ -643,26 +662,41 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 
 		} //displayMenu2 end
 	
+	public void gameDataLoad() {
+		if(this.userMapFile.exists() == true) {
+			userMap = this.loadInfo(userMapFileName);
+			} 
+		
+		if(this.idMapFile.exists() == true) {
+			idMap = this.loadInfo(idMapFileName);
+			}
+		
+		if(this.scoreMapFile.exists() == true) {
+			scoreMap = this.loadInfo(scoreMapFileName);
+		}
+		
+		sortByValue(scoreMap); // 랭킹 만들기
+	}
 	
 	
 	public void run() {
-			if(this.userMapFile.exists() == true) {
-				userMap = this.loadInfo(userMapFileName);
-				} 
-			System.out.println("loaded" + userMap.toString());
-			
-			if(this.idMapFile.exists() == true) {
-				idMap = this.loadInfo(idMapFileName);
-				}
-			System.out.println("idMap"+idMap.toString());
-			if(this.scoreMapFile.exists() == true) {
-				scoreMap = this.loadInfo(scoreMapFileName);
-			}
-			System.out.println("scoreMap" + scoreMap.toString());
-			// 데이터 로드 및 확인작업
-			
-			sortByValue(scoreMap).toString(); // 랭킹 만들기
-			
+//			if(this.userMapFile.exists() == true) {
+//				userMap = this.loadInfo(userMapFileName);
+//				} 
+//			System.out.println("loaded" + userMap.toString());
+//			
+//			if(this.idMapFile.exists() == true) {
+//				idMap = this.loadInfo(idMapFileName);
+//				}
+//			System.out.println("idMap"+idMap.toString());
+//			if(this.scoreMapFile.exists() == true) {
+//				scoreMap = this.loadInfo(scoreMapFileName);
+//			}
+//			System.out.println("scoreMap" + scoreMap.toString());
+//			// 데이터 로드 및 확인작업
+//			
+//			sortByValue(scoreMap).toString(); // 랭킹 만들기
+
 			
 			
 			while(true) {
