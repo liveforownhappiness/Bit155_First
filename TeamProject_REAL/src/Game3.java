@@ -81,8 +81,7 @@ public class Game3 extends Game {
 			}
 		}
 		fill(0);
-		
-		
+
 	}
 
 	public void fill(int cnt) {
@@ -90,16 +89,13 @@ public class Game3 extends Game {
 		if (cnt == 81) {
 			for (int i = 1; i <= 9; i++) {
 				for (int j = 1; j <= 9; j++) {
-//					System.out.print("[" + matrix[i][j]+"]" + "");
+
 				}
-//				System.out.println();
 
 			}
-			
-			int[][] matrixForSolve = matrix;
+
 			makeBlank(matrix);
 			showMatrix(matrix); // 확인용
-//			System.out.println(matrix.length);
 			long starttime = System.currentTimeMillis();
 			while (!checkEmptyKey) {
 				userInput(matrix);
@@ -109,13 +105,13 @@ public class Game3 extends Game {
 				checkEmpty(matrix);
 
 			} // while 탈출
-
-			System.out.println("모두 입력하셨습니다.");
-			System.out.println("채점을 하시려면 아무키나 눌러주세요!");
-			sc.nextLine();
 			solveBox(matrix);
 			solveCol(matrix);
 			solveRow(matrix);
+			System.out.println("모두 입력하셨습니다.");
+			System.out.println("채점을 하시려면 아무키나 눌러주세요!");
+			sc.nextLine();
+
 			if ((solBox == false) || (solCol == false) || (solRow == false)) {
 				System.out.println("도전 실패! ㅜ^ㅜ");
 				System.out.println("다시 플레이 하시겠습니까? ");
@@ -124,24 +120,24 @@ public class Game3 extends Game {
 
 				switch (sel) {
 				case 1:
-					return;
+					tgmain();
 
-
-				case 0: 
+				case 0:
 					System.exit(0);
 				}
+
 				// intro 가게 하기
 			} else {
 				System.out.println("축하합니다! 모두 맞추셨습니다!");
 				long endtime = System.currentTimeMillis();
 				float playTime = (endtime - starttime) / 1000f;
-				newScore =  100- ((int) ((playTime / 3600f) * 10));
+				newScore = 100 - ((int) ((playTime / 60f) * 10));
 				scoreAutoSave(newScore);
 				System.out.println("총 경과 시간: " + playTime);
 				System.out.println("획득점수: " + newScore + "!!");
 				System.out.println();
-				return;
-			
+				tgmain();
+
 			}
 
 		} // if end
@@ -149,7 +145,6 @@ public class Game3 extends Game {
 		int y = 0;
 		int x = 0;
 		boolean Check = true;
-		
 		for (int i = 1; i <= 9; i++) {
 			for (int j = 1; j <= 9; j++) {
 				if (matrix[i][j] == 0) {
@@ -174,7 +169,6 @@ public class Game3 extends Game {
 				matrix[y][x] = 0;
 			}
 		}
-		matrixForSolve = matrix;
 	} // fill end
 
 	// 문제 생성 모든 규칙 확인
@@ -245,26 +239,31 @@ public class Game3 extends Game {
 
 	// 유저 입력값 배열 저장
 	public void userInput(int[][] matrix) {
-		sc = new Scanner(System.in);
-		String inputNumb;
-		int col = 0;
-		int row = 0;
-		int sol = 0;
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("숫자를 입력해 주세요: (예: [행],[열]:[입력값])");
-		inputNumb = sc.nextLine();
-		String[] inputNumbArray = inputNumb.split(",|:");
-		row = Integer.parseInt(inputNumbArray[0]);
-		col = Integer.parseInt(inputNumbArray[1]);
-		sol = Integer.parseInt(inputNumbArray[2]);
-		matrix[row][col] = sol;
-		System.out.printf("[%d]행 [%d]열에 [%d]를 입력하였습니다.", row, col, sol);
+		try {
+			sc = new Scanner(System.in);
+			String inputNumb;
+			int col = 0;
+			int row = 0;
+			int sol = 0;
+
+			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			System.out.println("숫자를 입력해 주세요: (예: [행],[열]:[입력값])");
+			inputNumb = sc.nextLine();
+			String[] inputNumbArray = inputNumb.split(",|:");
+			row = Integer.parseInt(inputNumbArray[0]);
+			col = Integer.parseInt(inputNumbArray[1]);
+			sol = Integer.parseInt(inputNumbArray[2]);
+			matrix[row][col] = sol;
+			System.out.printf("[%d]행 [%d]열에 [%d]를 입력하였습니다.", row, col, sol);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
 
 	// box 정답 확인
 	public void solveBox(int[][] matrix) {
-		int row;
 //		int col;
 //		for (int r = 1; r <= 9; r++) {
 //			for (int t = 1; t <= 9; t++) {
@@ -297,163 +296,164 @@ public class Game3 extends Game {
 		Set<Integer> box7 = new HashSet<Integer>();
 		Set<Integer> box8 = new HashSet<Integer>();
 		Set<Integer> box9 = new HashSet<Integer>();
-		
-		for(int i =1; i <4; i++) {
-			for(int j =1; j<4; j++){
+
+		for (int i = 1; i < 4; i++) {
+			for (int j = 1; j < 4; j++) {
 				box1.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =1; i <4; i++) {
-			for(int j =4; j<7; j++){
+
+		for (int i = 1; i < 4; i++) {
+			for (int j = 4; j < 7; j++) {
 				box2.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =1; i <4; i++) {
-			for(int j =7; j<10; j++){
+
+		for (int i = 1; i < 4; i++) {
+			for (int j = 7; j < 10; j++) {
 				box3.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =4; i <7; i++) {
-			for(int j =1; j<4; j++){
+
+		for (int i = 4; i < 7; i++) {
+			for (int j = 1; j < 4; j++) {
 				box4.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =4; i <7; i++) {
-			for(int j =4; j<7; j++){
+
+		for (int i = 4; i < 7; i++) {
+			for (int j = 4; j < 7; j++) {
 				box5.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =4; i <7; i++) {
-			for(int j =7; j<10; j++){
+
+		for (int i = 4; i < 7; i++) {
+			for (int j = 7; j < 10; j++) {
 				box6.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =7; i <10; i++) {
-			for(int j =1; j<4; j++){
+
+		for (int i = 7; i < 10; i++) {
+			for (int j = 1; j < 4; j++) {
 				box7.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =7; i <10; i++) {
-			for(int j =4; j<7; j++){
+
+		for (int i = 7; i < 10; i++) {
+			for (int j = 4; j < 7; j++) {
 				box8.add(matrix[i][j]);
 			}
 		}
-		
-		for(int i =7; i <10; i++) {
-			for(int j =7; j<10; j++){
+
+		for (int i = 7; i < 10; i++) {
+			for (int j = 7; j < 10; j++) {
 				box9.add(matrix[i][j]);
 			}
 		}
-		if((box1.size()!=9) && (box2.size() != 9) && (box3.size() != 9) && (box4.size() != 9) 
-				&& (box5.size() != 9) && (box6.size() != 9) && (box7.size() != 9) && (box8.size() != 9) && (box9.size() != 9)){
+
+		if ((box1.size() != 9) || (box2.size() != 9) || (box3.size() != 9) || (box4.size() != 9) || (box5.size() != 9)
+				|| (box6.size() != 9) || (box7.size() != 9) || (box8.size() != 9) || (box9.size() != 9)) {
 			solBox = false;
-		}else {
+		} else {
 			solBox = true;
 		}
 	}
 
 	// 열 정답 확인
-		public void solveCol(int[][] matrix) {
-			Set<Integer> col1 = new HashSet<Integer>();
-			Set<Integer> col2 = new HashSet<Integer>();
-			Set<Integer> col3 = new HashSet<Integer>();
-			Set<Integer> col4 = new HashSet<Integer>();
-			Set<Integer> col5 = new HashSet<Integer>();
-			Set<Integer> col6 = new HashSet<Integer>();
-			Set<Integer> col7 = new HashSet<Integer>();
-			Set<Integer> col8 = new HashSet<Integer>();
-			Set<Integer> col9 = new HashSet<Integer>();
-			for(int i =1 ; i <=9 ; i++) {
-				col1.add(matrix[i][1]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col2.add(matrix[i][2]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col3.add(matrix[i][3]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col4.add(matrix[i][4]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col5.add(matrix[i][5]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col6.add(matrix[i][6]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col7.add(matrix[i][7]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col8.add(matrix[i][8]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				col9.add(matrix[i][9]);
-			}
-			
-			if ((col1.size() != 9) && (col2.size() != 9) && (col3.size() != 9) && (col4.size() != 9) && (col5.size() != 9)
-					&& (col6.size() != 9) && (col7.size() != 9) && (col8.size() != 9) && (col9.size() != 9)) {
-				solCol = false;
-			} else {
-				solCol = true;
-			}
-
+	public void solveCol(int[][] matrix) {
+		Set<Integer> col1 = new HashSet<Integer>();
+		Set<Integer> col2 = new HashSet<Integer>();
+		Set<Integer> col3 = new HashSet<Integer>();
+		Set<Integer> col4 = new HashSet<Integer>();
+		Set<Integer> col5 = new HashSet<Integer>();
+		Set<Integer> col6 = new HashSet<Integer>();
+		Set<Integer> col7 = new HashSet<Integer>();
+		Set<Integer> col8 = new HashSet<Integer>();
+		Set<Integer> col9 = new HashSet<Integer>();
+		for (int i = 1; i <= 9; i++) {
+			col1.add(matrix[i][1]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col2.add(matrix[i][2]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col3.add(matrix[i][3]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col4.add(matrix[i][4]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col5.add(matrix[i][5]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col6.add(matrix[i][6]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col7.add(matrix[i][7]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col8.add(matrix[i][8]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			col9.add(matrix[i][9]);
 		}
 
-		// 행 정답 확인
-		public void solveRow(int[][] matrix) {
-			Set<Integer> row1 = new HashSet<Integer>();
-			Set<Integer> row2 = new HashSet<Integer>();
-			Set<Integer> row3 = new HashSet<Integer>();
-			Set<Integer> row4 = new HashSet<Integer>();
-			Set<Integer> row5 = new HashSet<Integer>();
-			Set<Integer> row6 = new HashSet<Integer>();
-			Set<Integer> row7 = new HashSet<Integer>();
-			Set<Integer> row8 = new HashSet<Integer>();
-			Set<Integer> row9 = new HashSet<Integer>();
-			
-			for(int i =1 ; i <=9 ; i++) {
-				row1.add(matrix[1][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row2.add(matrix[2][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row3.add(matrix[3][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row4.add(matrix[4][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row5.add(matrix[5][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row6.add(matrix[6][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row7.add(matrix[7][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row8.add(matrix[8][i]);
-			}
-			for(int i =1 ; i <=9 ; i++) {
-				row9.add(matrix[9][i]);
-			}
-			
-			if ((row1.size() != 9) && (row2.size() != 9) && (row3.size() != 9) && (row4.size() != 9) && (row5.size() != 9)
-					&& (row6.size() != 9) && (row7.size() != 9) && (row8.size() != 9) && (row9.size() != 9)) {
-				solRow = false;
-			} else {
-				solRow = true;
-			}
+		if ((col1.size() != 9) || (col2.size() != 9) || (col3.size() != 9) || (col4.size() != 9) || (col5.size() != 9)
+				|| (col6.size() != 9) || (col7.size() != 9) || (col8.size() != 9) || (col9.size() != 9)) {
+			solCol = false;
+		} else {
+			solCol = true;
 		}
+
+	}
+
+	// 행 정답 확인
+	public void solveRow(int[][] matrix) {
+		Set<Integer> row1 = new HashSet<Integer>();
+		Set<Integer> row2 = new HashSet<Integer>();
+		Set<Integer> row3 = new HashSet<Integer>();
+		Set<Integer> row4 = new HashSet<Integer>();
+		Set<Integer> row5 = new HashSet<Integer>();
+		Set<Integer> row6 = new HashSet<Integer>();
+		Set<Integer> row7 = new HashSet<Integer>();
+		Set<Integer> row8 = new HashSet<Integer>();
+		Set<Integer> row9 = new HashSet<Integer>();
+
+		for (int i = 1; i <= 9; i++) {
+			row1.add(matrix[1][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row2.add(matrix[2][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row3.add(matrix[3][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row4.add(matrix[4][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row5.add(matrix[5][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row6.add(matrix[6][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row7.add(matrix[7][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row8.add(matrix[8][i]);
+		}
+		for (int i = 1; i <= 9; i++) {
+			row9.add(matrix[9][i]);
+		}
+
+		if ((row1.size() != 9) || (row2.size() != 9) || (row3.size() != 9) || (row4.size() != 9) || (row5.size() != 9)
+				|| (row6.size() != 9) || (row7.size() != 9) || (row8.size() != 9) || (row9.size() != 9)) {
+			solRow = false;
+		} else {
+			solRow = true;
+		}
+	}
 
 	// 빈칸 여부 확인
 	public void checkEmpty(int[][] matrix) {
