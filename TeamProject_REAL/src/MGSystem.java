@@ -146,7 +146,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	}
 	public boolean emailChecker(String email) {
 		String data = email;
-		String regExp = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+		String regExp = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+[\\\\.a-zA-Z0-9-]+\\.[a-zA-Z]+[a-zA-Z]+$";
 		return data.matches(regExp);
 	}
 	
