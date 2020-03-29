@@ -550,7 +550,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 	}
 	
 	void gameMenudisplay() {
-		toDp2 : while(true) {	 //여기41s가 게임4시작부분 // ? 이 주석 뭐지?
+		toDp2 : while(true) {	
 			System.out.println("gmd while start");
 			
 			System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
@@ -582,10 +582,10 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 							case 1: this.game1.tgMain();
 									saveCUGameScore();
 									break toGmd;
-							case 2: this.game2.playGame2();
-								saveCUGameScore();
+							case 2: this.game2.play2();
+									saveCUGameScore();
 								break toGmd;
-							case 3: System.out.println("게임3 실행");//this.playGame3; //준수도쿠
+							case 3:	this.game3.tgmain();
 								saveCUGameScore();
 							break toGmd;
 							case 4: this.game4.guguMain();//$$ game4 변경내용 수정
