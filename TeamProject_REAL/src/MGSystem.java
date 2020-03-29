@@ -582,7 +582,7 @@ public class MGSystem implements Serializable{ // 회원가입, 로그인 기능
 							case 1: this.game1.tgMain();
 									saveCUGameScore();
 									break toGmd;
-							case 2: this.game2.play2();
+							case 2: //this.game2.play2();//game2 추가되면 변경하기
 									saveCUGameScore();
 								break toGmd;
 							case 3:	this.game3.tgmain();
